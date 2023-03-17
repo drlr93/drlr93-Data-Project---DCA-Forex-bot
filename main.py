@@ -6,23 +6,24 @@ import pandas_ta as ta
 import matplotlib.pyplot as plt
 
 
-symbol = ['EURUSD',"USDJPY","USDCAD"] # Tradeable symbols
-timeframe = 15 # integer value representing minutes
+symbol = ['AUDNZD',"GBPUSD","USDJPY"] # Tradeable symbols
+timeframe = mt5.TIMEFRAME_H1# integer value representing minutes
 start_bar = 0 # initial position of first bar
-num_bars = 500 # number of bars
+num_bars = 100 # number of bars
 
 def strategy(symbol):
     for x in range(len(symbol)):
         bars = mt5.copy_rates_from_pos(symbol[x], timeframe, start_bar, num_bars)
         df = pd.DataFrame(bars)
-        df['EMA'] = pd.DataFrame(df["close"]).ta.ema(length=14)
-        
-        if (df["close"].iloc[-1]) > (df['EMA'].iloc[-1]):
+        df['EMA8'] = pd.DataFrame(df["close"]).ta.ema(length=8)
+        df['EMA5'] = pd.DataFrame(df["close"]).ta.ema(length=5)
+
+        if (df["EMA5"].iloc[-1]) > (df['EMA8'].iloc[-1]):
             direction = "buy"
         else:
             direction = "sell"
         print(direction)
-        plt.plot(df.index, df['close'],df['EMA'])
+        plt.plot(df.index,df['EMA8'],df["EMA5"])
         plt.show()
         globals()[f"direction{x}"] = direction
         
