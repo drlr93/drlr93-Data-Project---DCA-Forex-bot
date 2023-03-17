@@ -1,10 +1,19 @@
 # drlr93-Data-Project---DCA-Forex-bot
 drlr93/Data-Project---DCA-Forex-bot
 
+In the following project, we create a DCA bot that can invest in the forex market based on the direction of the currency pairs.
+Management risk is controlled using the dollar cost averaging technique.
 
+To predict the direction of the market, we select 3 uncorrelated currency pairs and find the market trend using 2 EMAs (8 and 5).
 
-![image](https://user-images.githubusercontent.com/98351714/225894347-45f8caff-cd58-4f7d-bc45-29c6660b877c.png)
-![image](https://user-images.githubusercontent.com/98351714/225894427-3e1a944d-3c66-47b5-a813-3ff3183fe897.png)
+![image](https://user-images.githubusercontent.com/98351714/225906878-f70ab4f8-f6e9-4151-9374-38792cba647c.png)
+
+We can see the result of the simulation process.
+
 ![image](https://user-images.githubusercontent.com/98351714/225905033-080e46ac-10c6-4301-a9a0-da8219c988f5.png)
 
+Position closing is done by the bot on the profit target or manually to cut losses.
 
+![image](https://user-images.githubusercontent.com/98351714/225906707-99b4b51e-1bd7-45ff-8154-2578e39df5bf.png)
+
+Financial report indicates good trading performance.
