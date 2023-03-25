@@ -6,10 +6,12 @@ import pandas_ta as ta
 import matplotlib.pyplot as plt
 
 
-symbol = ['AUDNZD',"GBPUSD","USDJPY"] # Tradeable symbols
+symbol = ['AUDNZD',"EURCAD","USDJPY"] # Tradeable symbols
 timeframe = mt5.TIMEFRAME_H1# integer value representing minutes
 start_bar = 0 # initial position of first bar
-num_bars = 100 # number of bars
+num_bars = 300 # number of bars
+profit = 200
+losses =100
 
 def strategy(symbol):
     for x in range(len(symbol)):
@@ -31,9 +33,9 @@ def strategy(symbol):
 strategy(symbol)
 
 
-bot1 = Bot(symbol[0],0.1,3,4,direction0)
-bot2 = Bot(symbol[1],0.1,3,4,direction1)
-bot3 = Bot(symbol[2],0.1,3,4,direction2)
+bot1 = Bot(symbol[0],0.1,3,10,direction0)
+bot2 = Bot(symbol[1],0.1,3,10,direction1)
+bot3 = Bot(symbol[2],0.1,3,10,direction2)
 
 def b1():
     bot1.run()

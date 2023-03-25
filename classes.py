@@ -1,6 +1,9 @@
 import MetaTrader5 as mt5
 import pandas as pd
 
+profit = 200
+losses = 100
+
 class Bot:
     def __init__(self,symbol,volume,profit_target,no_of_safty_orders,direction):
         self.symbol = symbol
@@ -134,7 +137,7 @@ class Bot:
         position = positions[len(positions) - 1]
         initial_price = position.price_open
         current_price = mt5.symbol_info_tick(symbol).ask
-        deviation = ((current_price - initial_price) / initial_price) * 100 * 100
+        deviation = ((current_price - initial_price) / initial_price) * 100 * 100  #TODO modify leverage
         if self.direction == "buy":
             return deviation
         if self.direction == "sell":
@@ -161,6 +164,13 @@ class Bot:
                             curr_no_of_safty_orders += 1
 
                     try:
+                        total_profit = sum([pos.profit for pos in pos])        #TODO
+                        print(total_profit)                                    #TODO
+                        if total_profit >= profit or total_profit <= losses:   #TODO
+                            result = mt5.positions_close_all()                 #TODO
+                            print(f"Closed {result} positions")                #TODO
+                        else:                                                  #TODO
+                            print("No profit o loss level or Failed to connect to account")  #TODO
                         pct_profit = self.cal_pct_profit(self.symbol)
                     except:
                         pass
