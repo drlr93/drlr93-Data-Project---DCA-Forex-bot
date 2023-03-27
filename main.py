@@ -13,6 +13,8 @@ num_bars = 300 # number of bars
 profit = 200
 losses =100
 
+mt5.initialize(login = 51147707,server = "ICMarketsEU-Demo",password ="XYPcfgAw")
+
 def strategy(symbol):
     for x in range(len(symbol)):
         bars = mt5.copy_rates_from_pos(symbol[x], timeframe, start_bar, num_bars)
@@ -33,9 +35,9 @@ def strategy(symbol):
 strategy(symbol)
 
 
-bot1 = Bot(symbol[0],0.1,3,10,direction0)
-bot2 = Bot(symbol[1],0.1,3,10,direction1)
-bot3 = Bot(symbol[2],0.1,3,10,direction2)
+bot1 = Bot(symbol[0],0.2,3,10,direction0)
+bot2 = Bot(symbol[1],0.2,3,10,direction1)
+bot3 = Bot(symbol[2],0.2,3,10,direction2)
 
 def b1():
     bot1.run()
@@ -48,7 +50,6 @@ thread1 = Thread(target=b1)
 thread2 = Thread(target=b2)
 thread3 = Thread(target=b3)
 
-mt5.initialize(login = 51147707,server = "ICMarketsEU-Demo",password ="XYPcfgAw")
 
 thread1.start()
 thread2.start()
