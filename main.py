@@ -35,9 +35,9 @@ def strategy(symbol):
 strategy(symbol)
 
 
-bot1 = Bot(symbol[0],0.2,3,10,direction0)
-bot2 = Bot(symbol[1],0.2,3,10,direction1)
-bot3 = Bot(symbol[2],0.2,3,10,direction2)
+bot1 = Bot(symbol[0],0.15,3,10,direction0)
+bot2 = Bot(symbol[1],0.15,3,10,direction1)
+bot3 = Bot(symbol[2],0.15,3,10,direction2)
 
 def b1():
     bot1.run()

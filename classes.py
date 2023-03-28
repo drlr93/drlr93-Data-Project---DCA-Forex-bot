@@ -162,18 +162,29 @@ class Bot:
                             deviation *= 2
                             next_price_level += deviation
                             curr_no_of_safty_orders += 1
+                            
+            position = mt5.positions_get(symbol=self.symbol)                    
+            total_profit = sum([position.profit for position in position])  
+            print(total_profit)
+            if total_profit >= profit or total_profit <= losses:   
+                for position in position:
+                    tick = mt5.symbol_info_tick(position.symbol)
 
-                    try:
-                        total_profit = sum([pos.profit for pos in pos])        #TODO
-                        print(total_profit)                                    #TODO
-                        if total_profit >= profit or total_profit <= losses:   #TODO
-                            result = mt5.positions_close_all()                 #TODO
-                            print(f"Closed {result} positions")                #TODO
-                        else:                                                  #TODO
-                            print("No profit o loss level or Failed to connect to account")  #TODO
-                        pct_profit = self.cal_pct_profit(self.symbol)
-                    except:
-                        pass
-                    if pct_profit >= self.profit_target:
-                        self.close_all(self.symbol)
-                        is_ok = False
+                    request = {
+                        "action": mt5.TRADE_ACTION_DEAL,
+                        "position": position.ticket,
+                        "symbol": position.symbol,
+                        "volume": position.volume,
+                        "type": mt5.ORDER_TYPE_BUY if position.type == 1 else mt5.ORDER_TYPE_SELL,
+                        "price": tick.ask if position.type == 1 else tick.bid,
+                        "deviation": 20,
+                        "magic": 100,
+                        "comment": "python script close",
+                        "type_time": mt5.ORDER_TIME_GTC,
+                        "type_filling": mt5.ORDER_FILLING_IOC,
+                    }
+
+                    result = mt5.order_send(request)             
+                    print(f"Closed {position} positions")                
+            else:                                                  
+                print("No profit o loss level or Failed to connect to account")  
