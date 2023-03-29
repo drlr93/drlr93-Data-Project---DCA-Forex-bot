@@ -13,7 +13,7 @@ We can see the result of the simulation process.
 ![image](https://user-images.githubusercontent.com/98351714/225905033-080e46ac-10c6-4301-a9a0-da8219c988f5.png)
 
 If the market goes in the opposite direction, the bot opens a new market order with higher volume than the previous orders to promediate.
-Position closing is done by the bot on the profit/loss target or manually to cut losses.
+Position closing is done by the bot on the profit target by symbol or manually to cut losses.
 
 ![image](https://user-images.githubusercontent.com/98351714/225906707-99b4b51e-1bd7-45ff-8154-2578e39df5bf.png)
 
